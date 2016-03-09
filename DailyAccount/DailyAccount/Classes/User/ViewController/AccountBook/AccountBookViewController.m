@@ -10,6 +10,7 @@
 #import "AccountBookVIew.h"
 #import "AccountBookCell.h"
 #import "AddBookViewController.h"
+#import <AVOSCloud.h>
 
 @interface AccountBookViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, BookNameDelegate>
 
@@ -59,9 +60,10 @@
     addBookVC.delegate = self;
 }
 
-- (void)AddBookName:(NSString *)name
-{
+- (void)AddBookName:(NSString *)name withObjectID:(NSString *)objectID
+{    
     [self.bookName addObject:name];
+    NSLog(@"%@", self.bookName);
     [self.accountBookView.collectionView reloadData];
 }
 
@@ -81,6 +83,7 @@
     cell.layer.masksToBounds = YES;
 //    cell.contentView.layer.masksToBounds = YES;
     cell.layer.cornerRadius = 10;
+    cell.name.textAlignment = NSTextAlignmentCenter;
 //    cell.contentView.layer.cornerRadius = 10;
     return cell;
     

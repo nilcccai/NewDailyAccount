@@ -10,7 +10,8 @@
 
 @protocol BookNameDelegate <NSObject>
 
-- (void)AddBookName:(NSString *)name;
+- (void)AddBookName:(NSString *)name
+       withObjectID:(NSString *)objectID;
 
 @end
 

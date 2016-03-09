@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TimeViewController">
+            <connections>
+                <outlet property="dataPicker" destination="3Jv-wk-aTi" id="vkW-ou-y1A"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="3Jv-wk-aTi">
+                    <rect key="frame" x="-160" y="-108" width="320" height="216"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="300" id="hHH-A9-jd6"/>
+                    </constraints>
+                    <date key="date" timeIntervalSinceReferenceDate="478661315.51278001">
+                        <!--2016-03-03 01:28:35 +0000-->
+                    </date>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="hHH-A9-jd6"/>
+                        </mask>
+                    </variation>
+                    <variation key="widthClass=compact">
+                        <mask key="constraints">
+                            <include reference="hHH-A9-jd6"/>
+                        </mask>
+                    </variation>
+                </datePicker>
+                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vln-t3-3zf">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                    <items>
+                        <barButtonItem title="取消" id="QwO-u9-ShL">
+                            <connections>
+                                <action selector="quxiaoItem:" destination="-1" id="Gkv-lh-7Gi"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="g0X-s4-M22"/>
+                        <barButtonItem title="完成" id="xyK-3u-Mzl">
+                            <connections>
+                                <action selector="finishItem:" destination="-1" id="jPW-XH-mF1"/>
+                            </connections>
+                        </barButtonItem>
+                    </items>
+                </toolbar>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="提醒时间" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zKo-w4-Xu8">
+                    <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="80" id="0iv-1T-KQ2"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="0iv-1T-KQ2"/>
+                        </mask>
+                    </variation>
+                    <variation key="widthClass=compact">
+                        <mask key="constraints">
+                            <include reference="0iv-1T-KQ2"/>
+                        </mask>
+                    </variation>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="Vln-t3-3zf" secondAttribute="trailing" id="9tk-vQ-9ks"/>
+                <constraint firstItem="3Jv-wk-aTi" firstAttribute="top" secondItem="Vln-t3-3zf" secondAttribute="bottom" id="Dra-2N-iAI"/>
+                <constraint firstAttribute="bottom" secondItem="3Jv-wk-aTi" secondAttribute="bottom" id="Kdx-1t-MzP"/>
+                <constraint firstItem="zKo-w4-Xu8" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="ddX-CO-367"/>
+                <constraint firstItem="3Jv-wk-aTi" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="fzM-jY-vF1"/>
+                <constraint firstAttribute="trailing" secondItem="3Jv-wk-aTi" secondAttribute="trailing" id="kPs-8E-wuU"/>
+                <constraint firstItem="Vln-t3-3zf" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="l6H-Ar-gNt"/>
+                <constraint firstItem="zKo-w4-Xu8" firstAttribute="top" secondItem="Vln-t3-3zf" secondAttribute="top" id="lBb-9F-cqF"/>
+                <constraint firstItem="zKo-w4-Xu8" firstAttribute="bottom" secondItem="Vln-t3-3zf" secondAttribute="bottom" id="ypr-KY-mYp"/>
+            </constraints>
+            <variation key="default">
+                <mask key="subviews">
+                    <exclude reference="3Jv-wk-aTi"/>
+                    <exclude reference="Vln-t3-3zf"/>
+                    <exclude reference="zKo-w4-Xu8"/>
+                </mask>
+                <mask key="constraints">
+                    <exclude reference="ddX-CO-367"/>
+                    <exclude reference="lBb-9F-cqF"/>
+                    <exclude reference="ypr-KY-mYp"/>
+                    <exclude reference="9tk-vQ-9ks"/>
+                    <exclude reference="l6H-Ar-gNt"/>
+                    <exclude reference="Dra-2N-iAI"/>
+                    <exclude reference="Kdx-1t-MzP"/>
+                    <exclude reference="fzM-jY-vF1"/>
+                    <exclude reference="kPs-8E-wuU"/>
+                </mask>
+            </variation>
+            <variation key="widthClass=compact">
+                <mask key="subviews">
+                    <include reference="3Jv-wk-aTi"/>
+                    <include reference="Vln-t3-3zf"/>
+                    <include reference="zKo-w4-Xu8"/>
+                </mask>
+                <mask key="constraints">
+                    <include reference="ddX-CO-367"/>
+                    <include reference="lBb-9F-cqF"/>
+                    <include reference="ypr-KY-mYp"/>
+                    <include reference="9tk-vQ-9ks"/>
+                    <include reference="l6H-Ar-gNt"/>
+                    <include reference="Dra-2N-iAI"/>
+                    <include reference="Kdx-1t-MzP"/>
+                    <include reference="fzM-jY-vF1"/>
+                    <include reference="kPs-8E-wuU"/>
+                </mask>
+            </variation>
+        </view>
+    </objects>
+</document>

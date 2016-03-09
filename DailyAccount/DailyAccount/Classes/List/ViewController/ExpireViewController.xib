@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ExpireViewController">
+            <connections>
+                <outlet property="dataPickerView" destination="odi-dM-isB" id="bek-Ed-QJf"/>
+                <outlet property="finishItem" destination="NuO-Yh-Vqc" id="aLX-ym-NU6"/>
+                <outlet property="quxiaoItem" destination="TfK-XU-vmd" id="Izz-CF-kRO"/>
+                <outlet property="toolbarview" destination="nxZ-ve-A7w" id="fmb-WV-fXW"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="odi-dM-isB">
+                    <rect key="frame" x="-160" y="-108" width="320" height="216"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="300" id="caF-ym-o5c"/>
+                    </constraints>
+                    <date key="date" timeIntervalSinceReferenceDate="478610821.06891698">
+                        <!--2016-03-02 11:27:01 +0000-->
+                    </date>
+                    <date key="minimumDate" timeIntervalSinceReferenceDate="473338800">
+                        <!--2016-01-01 11:00:00 +0000-->
+                    </date>
+                    <date key="maximumDate" timeIntervalSinceReferenceDate="4102311600">
+                        <!--2130-12-31 11:00:00 +0000-->
+                    </date>
+                    <locale key="locale" localeIdentifier="zh-Hans"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="caF-ym-o5c"/>
+                        </mask>
+                    </variation>
+                    <variation key="widthClass=compact">
+                        <mask key="constraints">
+                            <include reference="caF-ym-o5c"/>
+                        </mask>
+                    </variation>
+                </datePicker>
+                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nxZ-ve-A7w">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="P7p-nB-fem"/>
+                    </constraints>
+                    <items>
+                        <barButtonItem title="取消" id="TfK-XU-vmd">
+                            <connections>
+                                <action selector="quxiaoAction:" destination="-1" id="orv-OP-LHg"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="0f3-V5-Y30"/>
+                        <barButtonItem title="完成" id="NuO-Yh-Vqc">
+                            <connections>
+                                <action selector="finishAction:" destination="-1" id="CyB-x3-EE1"/>
+                            </connections>
+                        </barButtonItem>
+                    </items>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="P7p-nB-fem"/>
+                        </mask>
+                    </variation>
+                    <variation key="widthClass=compact">
+                        <mask key="constraints">
+                            <include reference="P7p-nB-fem"/>
+                        </mask>
+                    </variation>
+                </toolbar>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="到期时间" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cx5-g2-9LU">
+                    <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="100" id="v10-hL-ZBS"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="v10-hL-ZBS"/>
+                        </mask>
+                    </variation>
+                    <variation key="widthClass=compact">
+                        <mask key="constraints">
+                            <include reference="v10-hL-ZBS"/>
+                        </mask>
+                    </variation>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="nxZ-ve-A7w" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="4C5-Th-elz"/>
+                <constraint firstItem="odi-dM-isB" firstAttribute="top" secondItem="nxZ-ve-A7w" secondAttribute="bottom" id="9Z6-N5-haM"/>
+                <constraint firstAttribute="trailing" secondItem="odi-dM-isB" secondAttribute="trailing" id="Epb-wr-wu4"/>
+                <constraint firstItem="cx5-g2-9LU" firstAttribute="top" secondItem="nxZ-ve-A7w" secondAttribute="top" id="HzM-Mh-Wb9"/>
+                <constraint firstAttribute="bottom" secondItem="odi-dM-isB" secondAttribute="bottom" id="Isz-ff-uxL"/>
+                <constraint firstItem="cx5-g2-9LU" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="KZc-h0-xFI"/>
+                <constraint firstItem="odi-dM-isB" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="SHo-M7-qjd"/>
+                <constraint firstAttribute="trailing" secondItem="nxZ-ve-A7w" secondAttribute="trailing" id="X45-yn-q48"/>
+                <constraint firstItem="cx5-g2-9LU" firstAttribute="bottom" secondItem="nxZ-ve-A7w" secondAttribute="bottom" id="uWA-xb-s5J"/>
+            </constraints>
+            <variation key="default">
+                <mask key="subviews">
+                    <exclude reference="odi-dM-isB"/>
+                    <exclude reference="nxZ-ve-A7w"/>
+                    <exclude reference="cx5-g2-9LU"/>
+                </mask>
+                <mask key="constraints">
+                    <exclude reference="HzM-Mh-Wb9"/>
+                    <exclude reference="KZc-h0-xFI"/>
+                    <exclude reference="uWA-xb-s5J"/>
+                    <exclude reference="4C5-Th-elz"/>
+                    <exclude reference="X45-yn-q48"/>
+                    <exclude reference="9Z6-N5-haM"/>
+                    <exclude reference="Epb-wr-wu4"/>
+                    <exclude reference="Isz-ff-uxL"/>
+                    <exclude reference="SHo-M7-qjd"/>
+                </mask>
+            </variation>
+            <variation key="widthClass=compact">
+                <mask key="subviews">
+                    <include reference="odi-dM-isB"/>
+                    <include reference="nxZ-ve-A7w"/>
+                    <include reference="cx5-g2-9LU"/>
+                </mask>
+                <mask key="constraints">
+                    <include reference="HzM-Mh-Wb9"/>
+                    <include reference="KZc-h0-xFI"/>
+                    <include reference="uWA-xb-s5J"/>
+                    <include reference="4C5-Th-elz"/>
+                    <include reference="X45-yn-q48"/>
+                    <include reference="9Z6-N5-haM"/>
+                    <include reference="Epb-wr-wu4"/>
+                    <include reference="Isz-ff-uxL"/>
+                    <include reference="SHo-M7-qjd"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="316" y="110"/>
+        </view>
+    </objects>
+</document>

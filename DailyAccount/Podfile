@@ -1,0 +1,2 @@
+pod 'AVOSCloud'
+pod 'UMengSocial', '~> 4.3'

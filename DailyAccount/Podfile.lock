@@ -1,0 +1,13 @@
+PODS:
+  - AVOSCloud (3.2.6)
+  - UMengSocial (4.4)
+
+DEPENDENCIES:
+  - AVOSCloud
+  - UMengSocial (~> 4.3)
+
+SPEC CHECKSUMS:
+  AVOSCloud: 08ba88573fca8559dfc658942b391c4568fabfc0
+  UMengSocial: aba7296602310385114d82c255539a7bef3b7ab0
+
+COCOAPODS: 0.39.0

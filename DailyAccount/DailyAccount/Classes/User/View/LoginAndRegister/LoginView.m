@@ -31,6 +31,7 @@
     self.userPwdTF = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.userNameTF.frame), CGRectGetMaxY(self.userNameTF.frame) + 20, self.userNameTF.frame.size.width, self.userNameTF.frame.size.height)];
     self.userPwdTF.borderStyle = UITextBorderStyleRoundedRect;
     self.userPwdTF.placeholder = @"请输入密码";
+    self.userPwdTF.secureTextEntry = YES;
     [self addSubview:self.userPwdTF];
     
     self.loginButton = [UIButton buttonWithType:UIButtonTypeSystem];

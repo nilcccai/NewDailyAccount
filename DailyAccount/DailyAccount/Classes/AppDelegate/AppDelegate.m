@@ -42,13 +42,7 @@
     // UmengQQ
     [UMSocialQQHandler setQQWithAppId:DAUmengQQAppID appKey:DAUmengQQAppKey url:@"http://www.umeng.com/social"];
     
-    /*
-    NSString *documentPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).firstObject;
-    documentPath = [documentPath stringByAppendingString:@"/safe.txt"];
-    NSString *content = @"one0";
-    NSError *error = nil;
-    [content writeToFile:documentPath atomically:YES encoding:NSUTF8StringEncoding error:&error];
-    */
+    
     [[DataManager sharedDataManager] openDataBase];
     if ([[[DataManager sharedDataManager] selectAllDataFromTable] isEqualToString:@"1"])
     {

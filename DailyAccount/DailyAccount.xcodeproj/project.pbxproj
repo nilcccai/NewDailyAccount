@@ -33,6 +33,8 @@
 		C26983411C8AC159004849FF /* NSArray+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = C26983331C8AC159004849FF /* NSArray+MASAdditions.m */; };
 		C26983421C8AC159004849FF /* NSLayoutConstraint+MASDebugAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = C26983361C8AC159004849FF /* NSLayoutConstraint+MASDebugAdditions.m */; };
 		C26983431C8AC159004849FF /* View+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = C26983381C8AC159004849FF /* View+MASAdditions.m */; };
+		C271F7A21C8FC51C006E9EA9 /* UserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C271F7A11C8FC51C006E9EA9 /* UserInfoViewController.m */; };
+		C271F7A51C8FC544006E9EA9 /* UserInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = C271F7A41C8FC544006E9EA9 /* UserInfoView.m */; };
 		C2745A331C8DBD5C00243490 /* FingerOCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2745A321C8DBD5C00243490 /* FingerOCViewController.m */; };
 		C288C3DF1C87E7630081CA09 /* LLLockIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = C288C3D71C87E7630081CA09 /* LLLockIndicator.m */; };
 		C288C3E01C87E7630081CA09 /* LLLockPassword.m in Sources */ = {isa = PBXBuildFile; fileRef = C288C3D91C87E7630081CA09 /* LLLockPassword.m */; };
@@ -150,6 +152,10 @@
 		C26983371C8AC159004849FF /* View+MASAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "View+MASAdditions.h"; sourceTree = "<group>"; };
 		C26983381C8AC159004849FF /* View+MASAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "View+MASAdditions.m"; sourceTree = "<group>"; };
 		C26983391C8AC159004849FF /* View+MASShorthandAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "View+MASShorthandAdditions.h"; sourceTree = "<group>"; };
+		C271F7A01C8FC51C006E9EA9 /* UserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoViewController.h; sourceTree = "<group>"; };
+		C271F7A11C8FC51C006E9EA9 /* UserInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoViewController.m; sourceTree = "<group>"; };
+		C271F7A31C8FC544006E9EA9 /* UserInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoView.h; sourceTree = "<group>"; };
+		C271F7A41C8FC544006E9EA9 /* UserInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoView.m; sourceTree = "<group>"; };
 		C2745A311C8DBD5C00243490 /* FingerOCViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FingerOCViewController.h; sourceTree = "<group>"; };
 		C2745A321C8DBD5C00243490 /* FingerOCViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FingerOCViewController.m; sourceTree = "<group>"; };
 		C288C3D51C87E7630081CA09 /* LLLockConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLLockConfig.h; sourceTree = "<group>"; };
@@ -617,6 +623,8 @@
 				C288C3EF1C87EC1E0081CA09 /* LoginViewController.m */,
 				C288C3F01C87EC1E0081CA09 /* RegisterViewController.h */,
 				C288C3F11C87EC1E0081CA09 /* RegisterViewController.m */,
+				C271F7A01C8FC51C006E9EA9 /* UserInfoViewController.h */,
+				C271F7A11C8FC51C006E9EA9 /* UserInfoViewController.m */,
 				C288C3F21C87EC1F0081CA09 /* UserViewController.h */,
 				C288C3F31C87EC1F0081CA09 /* UserViewController.m */,
 			);
@@ -651,6 +659,8 @@
 				C288C4031C87EC990081CA09 /* RegisterView.m */,
 				C288C4041C87EC990081CA09 /* UserView.h */,
 				C288C4051C87EC990081CA09 /* UserView.m */,
+				C271F7A31C8FC544006E9EA9 /* UserInfoView.h */,
+				C271F7A41C8FC544006E9EA9 /* UserInfoView.m */,
 			);
 			path = LoginAndRegister;
 			sourceTree = "<group>";
@@ -881,6 +891,7 @@
 				C269833C1C8AC159004849FF /* MASConstraint.m in Sources */,
 				C24368241C8E602A00542310 /* SwitchManger.m in Sources */,
 				C269833A1C8AC159004849FF /* FirstViewController.m in Sources */,
+				C271F7A51C8FC544006E9EA9 /* UserInfoView.m in Sources */,
 				FDF92DB01C8AB75100B0ABD5 /* MoneyViewController.m in Sources */,
 				C224B5B91C85963D00A89D75 /* main.m in Sources */,
 				C224B5FE1C8596A000A89D75 /* ListViewController.m in Sources */,
@@ -912,6 +923,7 @@
 				C2C9D8821C8D366F00A6212A /* AccountManger.m in Sources */,
 				FDF92DB61C8AB79700B0ABD5 /* UIColor+ZXLazy.m in Sources */,
 				FDF92DAC1C8AB75100B0ABD5 /* ExpireViewController.m in Sources */,
+				C271F7A21C8FC51C006E9EA9 /* UserInfoViewController.m in Sources */,
 				C24368551C8EF55700542310 /* DataManager.m in Sources */,
 				C2745A331C8DBD5C00243490 /* FingerOCViewController.m in Sources */,
 			);

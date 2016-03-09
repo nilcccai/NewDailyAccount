@@ -10,6 +10,8 @@
 #import "LoginView.h"
 #import "RegisterViewController.h"
 #import "FindPwdViewController.h"
+#import <AVOSCloud.h>
+#import "UserViewController.h"
 
 @interface LoginViewController ()
 
@@ -31,6 +33,32 @@
     [self.loginView.backButton addTarget:self action:@selector(backButtonDidClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self.loginView.registerButton addTarget:self action:@selector(registerButtonDidClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self.loginView.findPwdButton addTarget:self action:@selector(findPwdButtonDidClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [self.loginView.loginButton addTarget:self action:@selector(loginButtonDidClicked:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+#pragma mark 登录按钮点击事件
+- (void)loginButtonDidClicked:(UIButton *)sender
+{
+    [AVUser logInWithUsernameInBackground:self.loginView.userNameTF.text password:self.loginView.userPwdTF.text block:^(AVUser *user, NSError *error) {
+        if (user != nil)
+        {
+            // 是否有用户名
+            [_delegate changeUserName:self.loginView.userNameTF.text];
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }
+    }];
+//    [AVUser logInWithMobilePhoneNumberInBackground:self.loginView.userNameTF.text password:self.loginView.userPwdTF.text block:^(AVUser *user, NSError *error) {
+//        // 是否有手机号
+//        if (user != nil)
+//        {
+//            [_delegate changeUserName:self.loginView.userNameTF.text];
+//            [self dismissViewControllerAnimated:YES completion:nil];
+//        }
+//    }];
+//    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"密码不匹配" preferredStyle:UIAlertControllerStyleAlert];
+//    [self presentViewController:alert animated:YES completion:nil];
+//    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleCancel handler:nil];
+//    [alert addAction:cancelAction];
 }
 
 #pragma mark 返回按钮点击事件

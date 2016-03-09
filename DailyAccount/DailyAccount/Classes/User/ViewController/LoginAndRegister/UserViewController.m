@@ -13,10 +13,12 @@
 #import "AccountBookViewController.h"
 #import <UMSocial.h>
 #import <LocalAuthentication/LocalAuthentication.h>
+#import "UserInfoViewController.h"
 
-@interface UserViewController ()<UITableViewDataSource, UITableViewDelegate, UMSocialUIDelegate>
+@interface UserViewController ()<UITableViewDataSource, UITableViewDelegate, UMSocialUIDelegate, UserNameDelegate, UserLogOut>
 
 @property (nonatomic, strong) UserView *userView;
+@property (nonatomic, copy) NSString *userInfo;
 
 @end
 
@@ -30,6 +32,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.userInfo = @"未登录";
     
     self.userView.userTableView.delegate = self;
     self.userView.userTableView.dataSource = self;
@@ -82,7 +86,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"userListCell" forIndexPath:indexPath];
     switch (indexPath.section)
     {
-        case 0:cell.textLabel.text = @"未登录";break;
+        case 0:cell.textLabel.text = self.userInfo;break;
         case 1:
         {
             switch (indexPath.row)
@@ -130,10 +134,22 @@
     {
         case 0:
         {
-            LoginViewController *loginVC = [LoginViewController new];
-            UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:loginVC];
-            [self presentViewController:nc animated:YES completion:nil];
-            break;
+            if ([self.userInfo isEqualToString:@"未登录"])
+            {
+                LoginViewController *loginVC = [LoginViewController new];
+                loginVC.delegate = self;
+                UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:loginVC];
+                [self presentViewController:nc animated:YES completion:nil];
+                break;
+            }
+            else
+            {
+                UserInfoViewController *infoVC = [UserInfoViewController new];
+                infoVC.delegate = self;
+                infoVC.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:infoVC animated:YES];
+                break;
+            }
         }
         case 1:
         {
@@ -172,6 +188,18 @@
         default:
             break;
     }
+}
+
+- (void)changeUserName:(NSString *)name
+{
+    self.userInfo = name;
+    [self.userView.userTableView reloadData];
+}
+
+- (void)changeUserLogOutName:(NSString *)name
+{
+    self.userInfo = name;
+    [self.userView.userTableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {

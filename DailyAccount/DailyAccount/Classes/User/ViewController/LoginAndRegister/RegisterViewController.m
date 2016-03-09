@@ -51,6 +51,8 @@
 #pragma mark 发送验证码
 - (void)sendButtonDidClicked:(UIButton *)sender
 {
+#warning 记得打开啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊！！！！！！！！！！！！！！！！！！！！
+    /*
     [AVOSCloud requestSmsCodeWithPhoneNumber:self.registerView.phoneNumTF.text appName:@"每天记" operation:@"注册账户" timeToLive:5 callback:^(BOOL succeeded, NSError *error) {
         if (succeeded)
         {
@@ -65,6 +67,7 @@
             NSLog(@"错误");
         }
     }];
+     */
 }
 
 #pragma mark 倒计时
@@ -96,21 +99,35 @@
             user.username = self.registerView.userNameTF.text;
             user.password = self.registerView.userPwdTF.text;
             user.mobilePhoneNumber = self.registerView.phoneNumTF.text;
-            [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                if (succeeded)
-                {
-                    NSLog(@"注册成功");
-                    [self.navigationController popViewControllerAnimated:YES];
-                }
-                else
-                {
-                    NSLog(@"注册失败");
-                }
-            }];
+            if ([self.registerView.userPwdTF.text isEqualToString:self.registerView.userPwdTF2.text])
+            {
+                [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                    if (succeeded)
+                    {
+                        NSLog(@"注册成功");
+                        [self.navigationController popViewControllerAnimated:YES];
+                    }
+                    else
+                    {
+                        NSLog(@"注册失败");
+                    }
+                }];
+            }
+            else
+            {
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"注册失败，两次密码不一致" preferredStyle:UIAlertControllerStyleAlert];
+                [self presentViewController:alert animated:YES completion:nil];
+                UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleCancel handler:nil];
+                [alert addAction:cancelAction];
+            }
 //        }
 //        else
 //        {
 //            NSLog(@"验证失败");
+//            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"验证码错误" preferredStyle:UIAlertControllerStyleAlert];
+//            [self presentViewController:alert animated:YES completion:nil];
+//            UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleCancel handler:nil];
+//            [alert addAction:cancelAction];
 //        }
 //    }];
 }

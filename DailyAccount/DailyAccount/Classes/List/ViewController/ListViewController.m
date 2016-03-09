@@ -15,6 +15,7 @@
 #import "ListModel.h"
 #import "ListHeaderView.h"
 #import "SRModel.h"
+#import "AccountBookViewController.h"
 @interface ListViewController ()<UITableViewDataSource,UITableViewDelegate,AccountViewControllerDelegate,UICollectionViewDataSource,UICollectionViewDelegate>
 @property(nonatomic,strong)UICollectionView *accountView;
 @property(nonatomic,strong)UIView *mainView;
@@ -33,6 +34,8 @@
 @property(nonatomic,strong)UILabel *srLabel;
 @property(nonatomic,strong)UILabel *zcLabel;
 @property(nonatomic,strong)UILabel *lineLabel;
+
+@property(nonatomic,strong)NSMutableArray *array;
 
 @end
 @implementation ListViewController
@@ -57,6 +60,8 @@
     [self.tableView reloadData];
 
 }
+
+
 
 #pragma mark 添加tableView的头部
 
@@ -222,6 +227,12 @@
 #pragma mark 添加改变账本种类的按钮
 -(void)accountButtonAction
 {
+    AccountBookViewController *book = [[AccountBookViewController alloc] init];
+    
+    self.array = book.bookName;
+    [self.accountView reloadData];
+    DALog(@"账本数组 %@",self.array);
+
     if (self.tag == 100) {
         [UIView animateWithDuration:0.5 animations:^{
             self.accountView.frame = CGRectMake(0, 0, DAScreenWidth,200);
@@ -241,7 +252,6 @@
 }
 
 #pragma mark ecollectionView 代理方法
-
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"collection" forIndexPath:indexPath];
@@ -253,10 +263,6 @@
 {
     return 10;
 }
-
-
-
-
 
 #pragma mark 添加日历按钮
 -(void)calendarButtonAction

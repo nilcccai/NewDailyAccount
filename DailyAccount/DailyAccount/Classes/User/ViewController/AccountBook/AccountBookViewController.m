@@ -14,7 +14,6 @@
 @interface AccountBookViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, BookNameDelegate>
 
 @property (nonatomic, strong) AccountBookVIew *accountBookView;
-@property (nonatomic, strong) NSMutableArray *bookName;
 
 @end
 

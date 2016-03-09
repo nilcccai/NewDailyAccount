@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class ListHeaderView;
 @interface ListViewController : UIViewController
-
+@property(nonatomic,strong)ListHeaderView *headerView;
 @end

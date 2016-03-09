@@ -8,7 +8,7 @@
 
 #import "AccountViewController.h"
 #import "CollectionViewCell.h"
-
+#import "ListViewController.h"
 @interface AccountViewController ()<UICollectionViewDataSource,UICollectionViewDelegate, UITextFieldDelegate>
 @property(nonatomic,strong) UISegmentedControl *segment;
 @property(nonatomic,strong) UICollectionView *LeftCollection;
@@ -25,9 +25,35 @@
 @property (nonatomic, strong) UITextField *priceTF;
 @property (nonatomic, strong) UIButton *saveButton;
 
+@property(nonatomic,strong)NSMutableArray *mutbleArray;
+@property(nonatomic,strong)NSMutableDictionary *dict;
+
+@property(nonatomic,copy)NSString *str;
+
+@property(nonatomic,copy)NSString *index;
+
 @end
 
 @implementation AccountViewController
+
+
+-(NSMutableArray *)mutbleArray
+{
+    if (_mutbleArray == nil) {
+        _mutbleArray = [NSMutableArray array];
+        
+    }
+    return _mutbleArray;
+}
+
+-(NSMutableDictionary *)dict
+{
+    if (_dict == nil) {
+        _dict = [NSMutableDictionary dictionary];
+    }
+    return _dict;
+}
+
 
 //收入
 - (NSMutableArray *)buttonName
@@ -65,21 +91,13 @@
     return _picture;
 }
 
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
-    
     UIView *navigationView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, DAScreenWidth, 64)];
     navigationView.backgroundColor = DABlueColor;
-    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    backButton.frame = CGRectMake(20, 20, 32, 32);
-    [backButton setTitle:nil forState:UIControlStateNormal];
-    backButton.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"userDown"]];
     [self.view addSubview:navigationView];
-    [navigationView addSubview:backButton];
-    
+
+    self.view.backgroundColor = [UIColor whiteColor];
     self.headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, DAScreenWidth, 108)];
     [self.view addSubview:self.headerView];
     
@@ -88,13 +106,8 @@
     
     self.LeftCollection.delegate = self;
     self.LeftCollection.dataSource = self;
-    
-    
     [self.LeftCollection registerNib:[UINib nibWithNibName:@"CollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"cell"];
-    
-    
-    self.segment = [[UISegmentedControl alloc]initWithItems:@[@"收入",@"支出"]];
-//    self.segment.tintColor = [UIColor colorWithRed:0.98f green:0.33f blue:0.34f alpha:1.00f];
+        self.segment = [[UISegmentedControl alloc]initWithItems:@[@"收入",@"支出"]];
     self.segment.backgroundColor = [UIColor clearColor];
     self.segment.tintColor = DABlueColor;
     self.segment.frame = CGRectMake(self.view.frame.size.width * 0.5 - ((self.view.frame.size.width * 0.55)*0.5),20, self.view.frame.size.width * 0.55, 25);
@@ -111,14 +124,23 @@
 
 - (void)saveButtonDidClicked:(UIButton *)sender
 {
+    [self.dict removeAllObjects];
+    [self.dict setValue:self.className.text forKey:@"name"];
+    [self.dict setValue:self.priceTF.text forKey:@"money"];
+    [self.dict setValue:self.str forKey:@"image"];
+    [self.dict setValue:self.index forKey:@"index"];
+    [self.mutbleArray addObject:self.dict];
+    NSLog(@"++++++%@",self.mutbleArray);
+    if ([self.delegate respondsToSelector:@selector(sendMessageToAlarmWith:)]) {
+        [self.delegate sendMessageToAlarmWith:self.mutbleArray];
+    }
     [self dismissViewControllerAnimated:YES completion:nil];
-    NSLog(@"保存");
+
 }
 
 -(void)segementClick:(UISegmentedControl *)sender
 {
     if (sender.selectedSegmentIndex == 0) {
-        
         [self.LeftCollection reloadData];
         self.classImage.image = [UIImage imageNamed:@"gongzi"];
         self.className.text = @"工资";
@@ -134,8 +156,6 @@
 
 - (void)createHeaderView
 {
-    
-    
     self.classImage = [[UIImageView alloc] initWithFrame:CGRectMake(12, 70, 32, 32)];
     self.classImage.image = [UIImage imageNamed:@"gongzi"];
     [self.headerView addSubview:self.classImage];
@@ -155,7 +175,6 @@
     [self.saveButton setTintColor:DABlueColor];
     [self.headerView addSubview:self.saveButton];
 }
-
 -(void)creatLeftView
 {
     
@@ -191,26 +210,33 @@
     if (self.segment.selectedSegmentIndex == 0) {
         cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",self.picName[indexPath.row]]];
         cell.name.text = self.buttonName[indexPath.row];
-    }else{
+        
+        self.index = [NSString stringWithFormat:@"%ld",(long)self.segment.selectedSegmentIndex];
+    }else if(self.segment.selectedSegmentIndex == 1){
         
         cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",self.picture[indexPath.row]]];
         cell.name.text = self.name[indexPath.row];
-        
+        self.index = [NSString stringWithFormat:@"%ld",(long)self.segment.selectedSegmentIndex];
     }
     return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     if (self.segment.selectedSegmentIndex == 0)
     {
         self.classImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",self.picName[indexPath.row]]];
         self.className.text = self.buttonName[indexPath.row];
+        
+        self.str = self.picName[indexPath.row];
     }
     else
     {
         self.classImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",self.picture[indexPath.row]]];
         self.className.text = self.name[indexPath.row];
+        
+        self.str = self.picture[indexPath.row];
     }
 }
 

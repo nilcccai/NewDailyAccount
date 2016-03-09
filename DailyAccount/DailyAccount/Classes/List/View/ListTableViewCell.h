@@ -7,7 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class ListModel;
+@class SRModel;
 @interface ListTableViewCell : UITableViewCell
+
+@property(nonatomic,strong)ListModel *model;
+
+@property(nonatomic,strong)SRModel *srModel;
+
+@property (weak, nonatomic) IBOutlet UILabel *RNameLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *RMoneyLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *LNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *LMoneyLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *aImageView;
+
 
 @end

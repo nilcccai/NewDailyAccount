@@ -46,9 +46,6 @@
             [_delegate AddBookName:self.nameTF.text withObjectID:bookName.objectId];
         }];
         [self.navigationController popViewControllerAnimated:YES];
-        
-        
-        
     }
     else
     {

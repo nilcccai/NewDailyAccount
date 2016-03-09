@@ -16,6 +16,7 @@
 
 @property (nonatomic, strong) AccountBookVIew *accountBookView;
 
+
 @end
 
 @implementation AccountBookViewController
@@ -29,6 +30,13 @@
     return _bookName;
 }
 
+-(NSMutableArray *)tempArray
+{
+    if (!_tempArray) {
+        _tempArray = [NSMutableArray array];
+    }
+    return _tempArray;
+}
 
 - (void)loadView
 {
@@ -63,8 +71,14 @@
 - (void)AddBookName:(NSString *)name withObjectID:(NSString *)objectID
 {    
     [self.bookName addObject:name];
-    NSLog(@"%@", self.bookName);
+    NSLog(@"添加：%@", self.bookName);
+    self.tempArray = [NSMutableArray arrayWithArray:self.bookName];
+    NSLog(@"self.tempArray :%@",self.tempArray );
     [self.accountBookView.collectionView reloadData];
+    
+    //发送通知
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"zhangben" object:nil userInfo:@{@"name":self.tempArray}];
+     
 }
 
 #pragma mark 个数

@@ -101,6 +101,7 @@
 		FDFD62231C8FB489009589DF /* ListHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FDFD62221C8FB489009589DF /* ListHeaderView.xib */; };
 		FDFD62281C8FD316009589DF /* SRModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FDFD62271C8FD316009589DF /* SRModel.m */; };
 		FDFD622A1C8FF84F009589DF /* Foundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = FDFD62291C8FF84F009589DF /* Foundation+Log.m */; };
+		FDFD62351C9043AC009589DF /* accountCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FDFD62341C9043AC009589DF /* accountCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -274,6 +275,8 @@
 		FDFD62261C8FD316009589DF /* SRModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRModel.h; sourceTree = "<group>"; };
 		FDFD62271C8FD316009589DF /* SRModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRModel.m; sourceTree = "<group>"; };
 		FDFD62291C8FF84F009589DF /* Foundation+Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Foundation+Log.m"; sourceTree = "<group>"; };
+		FDFD62331C9043AC009589DF /* accountCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = accountCell.h; sourceTree = "<group>"; };
+		FDFD62341C9043AC009589DF /* accountCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = accountCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -462,6 +465,8 @@
 				FDFD621F1C8FB463009589DF /* ListHeaderView.h */,
 				FDFD62201C8FB463009589DF /* ListHeaderView.m */,
 				FDFD62221C8FB489009589DF /* ListHeaderView.xib */,
+				FDFD62331C9043AC009589DF /* accountCell.h */,
+				FDFD62341C9043AC009589DF /* accountCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -800,7 +805,7 @@
 				TargetAttributes = {
 					C224B5B31C85963D00A89D75 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = 57N9G42VQ2;
+						DevelopmentTeam = 8L9BZ883W8;
 					};
 				};
 			};
@@ -902,6 +907,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDFD62351C9043AC009589DF /* accountCell.m in Sources */,
 				C288C3F51C87EC1F0081CA09 /* LoginViewController.m in Sources */,
 				C288C40D1C87EC990081CA09 /* SafetyView.m in Sources */,
 				C288C40C1C87EC990081CA09 /* UserView.m in Sources */,

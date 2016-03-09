@@ -12,40 +12,135 @@
 #import "CalendarButtonController.h"
 #import "ListTableViewCell.h"
 #import "AccountViewController.h"
-
-@interface ListViewController ()<UITableViewDataSource,UITableViewDelegate>
-@property(nonatomic,strong)UIView *accountView;
+#import "ListModel.h"
+#import "ListHeaderView.h"
+#import "SRModel.h"
+@interface ListViewController ()<UITableViewDataSource,UITableViewDelegate,AccountViewControllerDelegate,UICollectionViewDataSource,UICollectionViewDelegate>
+@property(nonatomic,strong)UICollectionView *accountView;
 @property(nonatomic,strong)UIView *mainView;
 @property(nonatomic,strong)UIButton *alarmButton;
 @property(nonatomic,strong)UIButton *accountButton;
 @property(nonatomic,strong)UIButton *calendarButton;
 @property(nonatomic,assign)NSInteger tag;
 @property(nonatomic,strong)UITableView *tableView;
-
 @property(nonatomic,assign)CGRect rect;
 
+@property(nonatomic,strong)NSMutableArray *tempArray;
+@property(nonatomic,strong)NSMutableArray *tempArray1;
+@property(nonatomic,copy)NSString *index;
+
+@property(nonatomic,strong)UILabel *zjLabel;
+@property(nonatomic,strong)UILabel *srLabel;
+@property(nonatomic,strong)UILabel *zcLabel;
+@property(nonatomic,strong)UILabel *lineLabel;
+
 @end
-
 @implementation ListViewController
-
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
     [self setAccountView];
+    [self createHeaderView];
     self.tag = 100;
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    self.accountView.dataSource = self;
+    self.accountView.delegate = self;
+    
+    [self.accountView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"collection"];
     
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ListTableViewCell class]) bundle:nil] forCellReuseIdentifier:@"cell"];
 
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithTitle:@"记一笔" style:UIBarButtonItemStylePlain target:self action:@selector(addButtonDidClicked:)];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationItem.rightBarButtonItem = addButton;
+    [self.tableView reloadData];
+
 }
 
+#pragma mark 添加tableView的头部
+
+-(void)createHeaderView
+{
+    self.headerView = [ListHeaderView listHeaderView];
+    self.headerView.frame = CGRectMake(0, 0,DAScreenWidth,DAScreenWidth/3 +30);
+    self.tableView.tableHeaderView = self.headerView;
+    self.zjLabel = [[UILabel alloc] initWithFrame:CGRectMake(DAScreenWidth/3 + 10,25, DAScreenWidth/3 - 20,DAScreenWidth/3 - 20)];
+    self.zjLabel.text = @"月预算\n 394";
+    self.zjLabel.numberOfLines = 0;
+    self.zjLabel.textAlignment = NSTextAlignmentCenter;
+    self.zjLabel.backgroundColor = DABlueColor;
+    self.zjLabel.layer.masksToBounds = YES;
+    self.zjLabel.layer.cornerRadius = (DAScreenWidth/3 - 20)/2;
+    [self.headerView addSubview:self.zjLabel];
+    
+    self.zcLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.zjLabel.frame) + 20, 50,self.zjLabel.frame.size.width, 50)];
+    self.zcLabel.textAlignment = NSTextAlignmentCenter;
+    self.zcLabel.text = @"3月份支出\n113.00";
+    self.zcLabel.numberOfLines = 0;
+    [self.headerView addSubview:self.zcLabel];
+    
+    self.srLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.zjLabel.frame) - self.zjLabel.frame.size.width, 50, self.zjLabel.frame.size.width, 50)];
+    self.srLabel.text = @"3月份收入\n113.00";
+    self.srLabel.numberOfLines = 0;
+    self.srLabel.textAlignment = NSTextAlignmentCenter;
+    
+    [self.headerView addSubview:self.srLabel];
+    
+    self.lineLabel =[[UILabel alloc] initWithFrame:CGRectMake((DAScreenWidth-2)/2, CGRectGetMaxY(self.zjLabel.frame), 2, self.headerView.frame.size.height - CGRectGetMaxY(self.zjLabel.frame))];
+    self.lineLabel.backgroundColor = DABlueColor;
+    [self.headerView addSubview:self.lineLabel];
+
+}
+
+#pragma mark 执行代理方法
+-(NSMutableArray *)tempArray
+{
+    if (!_tempArray) {
+        _tempArray  = [NSMutableArray array];
+    }
+    return _tempArray;
+}
+-(NSMutableArray *)tempArray1
+{
+    if (!_tempArray1) {
+        _tempArray1  = [NSMutableArray array];
+    }
+    return _tempArray1;
+}
+
+
+
+-(void)sendMessageToAlarmWith:(NSMutableArray *)mutArray
+{
+    for (NSDictionary *dic in mutArray) {
+        
+        self.index = dic[@"index"];
+        
+        if ([self.index isEqualToString:@"0"]) {
+            SRModel *srModel = [[SRModel alloc] init];
+            [srModel setValuesForKeysWithDictionary:dic];
+            [self.tempArray addObject:srModel];
+            ListModel *model = [[ListModel alloc] init];
+            [self.tempArray1 addObject:model];
+            
+        }else{
+            ListModel *model = [[ListModel alloc] init];
+            [model setValuesForKeysWithDictionary:dic];
+            [self.tempArray1 addObject:model];
+            SRModel *srModel = [[SRModel alloc] init];
+            [self.tempArray addObject:srModel];
+        }
+    }
+    [self.tableView reloadData];
+    DALog(@"=========%@",self.tempArray);
+    
+}
 #pragma mark 记账
 - (void)addButtonDidClicked:(UIBarButtonItem *)sender
 {
     AccountViewController *accountVC = [AccountViewController new];
+    accountVC.delegate = self;
     [self presentViewController:accountVC animated:YES completion:nil];
 }
 
@@ -57,7 +152,15 @@
     //self.mainView.backgroundColor = [UIColor redColor];
     [self.view addSubview:self.mainView];
     //    添加账本选择的view
-    self.accountView = [[UIView alloc] initWithFrame:CGRectMake(0,-200, DAScreenWidth,200)];
+    
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+    layout.minimumInteritemSpacing = 5;
+    layout.minimumLineSpacing = 5;
+    layout.itemSize = CGSizeMake(DAScreenWidth/3, 180);
+    layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    self.accountView = [[UICollectionView alloc] initWithFrame:CGRectMake(0,-200, DAScreenWidth,200) collectionViewLayout:layout];
+    self.accountView.backgroundColor = [UIColor redColor];
+//    self.accountView = [[UIView alloc] initWithFrame:CGRectMake(0,-200, DAScreenWidth,200)];
     //self.accountView.backgroundColor = [UIColor greenColor];
     [self.view addSubview:self.accountView];
     
@@ -66,10 +169,6 @@
     self.tableView = [[UITableView alloc] initWithFrame:self.rect style:UITableViewStylePlain];
 
     [self.view addSubview:self.tableView];
-
-    
-   // DALog(@"accountView %@",self.accountView.frame);
-    
     //    添加闹铃
     self.alarmButton = [UIButton buttonWithType:UIButtonTypeSystem];
     [self.mainView addSubview:self.alarmButton];
@@ -129,42 +228,70 @@
             self.mainView.frame = CGRectMake(0,200, DAScreenWidth,100);
             self.tableView.frame = CGRectMake(0,300, DAScreenWidth, DAScreenHeight - 300);
         }];
-        
         self.tag++;
-        
     }else if(self.tag == 101){
         [UIView animateWithDuration:0.5 animations:^{
             self.accountView.frame = CGRectMake(0, -200, DAScreenWidth,200);
             self.mainView.frame = CGRectMake(0,64, DAScreenWidth, 100);
             self.tableView.frame = self.rect;
-
         }];
 
         self.tag--;
     }
 }
+
+#pragma mark ecollectionView 代理方法
+
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"collection" forIndexPath:indexPath];
+    
+    return cell;
+}
+
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return 10;
+}
+
+
+
+
+
 #pragma mark 添加日历按钮
 -(void)calendarButtonAction
 {
     CalendarButtonController *cbc = [[CalendarButtonController alloc] init];
     [self.navigationController pushViewController:cbc animated:YES];
-    
-    
 }
-
 #pragma mark cell数据源
-
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 20;
+    return self.tempArray.count;
 }
-
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-        //cell.textLabel.text = @"青龙白虎";
+    
+    if ([self.index isEqualToString:@"0"]) {
+        cell.srModel = self.tempArray[indexPath.row];
+        
+    }else{
+        
+        cell.model = self.tempArray1[indexPath.row];
+    }
     return cell;
 }
 
-#pragma mark 插入数据
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 80;
+}
+
+
+
+
+
+
+
 @end

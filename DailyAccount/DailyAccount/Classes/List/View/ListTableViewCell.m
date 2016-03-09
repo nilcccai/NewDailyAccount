@@ -7,12 +7,30 @@
 //
 
 #import "ListTableViewCell.h"
-
+#import "ListModel.h"
+#import "SRModel.h"
 @implementation ListTableViewCell
 
 - (void)awakeFromNib {
     // Initialization code
 }
+
+-(void)setModel:(ListModel *)model
+{
+    _model = model;
+    self.RNameLabel.text = model.name;
+    self.RMoneyLabel.text = model.money;
+    self.aImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",model.image]];
+    
+}
+
+-(void)setSrModel:(SRModel *)srModel
+{
+    self.LNameLabel.text = srModel.name;
+    self.LMoneyLabel.text = srModel.money;
+        self.aImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",srModel.image]];
+}
+
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol AccountViewControllerDelegate <NSObject>
+
+-(void)sendMessageToAlarmWith:(NSMutableArray *)mutArray;
+
+@end
+
 @interface AccountViewController : UIViewController
 
+@property(nonatomic,weak)id<AccountViewControllerDelegate>delegate;
 @end

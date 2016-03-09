@@ -10,4 +10,6 @@
 
 @interface AccountBookViewController : UIViewController
 
+@property (nonatomic, strong) NSMutableArray *bookName;
+
 @end

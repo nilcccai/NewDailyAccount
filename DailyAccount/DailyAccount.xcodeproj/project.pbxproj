@@ -33,6 +33,7 @@
 		C26983431C8AC159004849FF /* View+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = C26983381C8AC159004849FF /* View+MASAdditions.m */; };
 		C271F7A21C8FC51C006E9EA9 /* UserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C271F7A11C8FC51C006E9EA9 /* UserInfoViewController.m */; };
 		C271F7A51C8FC544006E9EA9 /* UserInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = C271F7A41C8FC544006E9EA9 /* UserInfoView.m */; };
+		C271F7A91C901DC4006E9EA9 /* ChineseToPinyin.m in Sources */ = {isa = PBXBuildFile; fileRef = C271F7A81C901DC4006E9EA9 /* ChineseToPinyin.m */; };
 		C2745A331C8DBD5C00243490 /* FingerOCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2745A321C8DBD5C00243490 /* FingerOCViewController.m */; };
 		C288C3DF1C87E7630081CA09 /* LLLockIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = C288C3D71C87E7630081CA09 /* LLLockIndicator.m */; };
 		C288C3E01C87E7630081CA09 /* LLLockPassword.m in Sources */ = {isa = PBXBuildFile; fileRef = C288C3D91C87E7630081CA09 /* LLLockPassword.m */; };
@@ -157,6 +158,8 @@
 		C271F7A11C8FC51C006E9EA9 /* UserInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoViewController.m; sourceTree = "<group>"; };
 		C271F7A31C8FC544006E9EA9 /* UserInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoView.h; sourceTree = "<group>"; };
 		C271F7A41C8FC544006E9EA9 /* UserInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoView.m; sourceTree = "<group>"; };
+		C271F7A71C901DC4006E9EA9 /* ChineseToPinyin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChineseToPinyin.h; sourceTree = "<group>"; };
+		C271F7A81C901DC4006E9EA9 /* ChineseToPinyin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChineseToPinyin.m; sourceTree = "<group>"; };
 		C2745A311C8DBD5C00243490 /* FingerOCViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FingerOCViewController.h; sourceTree = "<group>"; };
 		C2745A321C8DBD5C00243490 /* FingerOCViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FingerOCViewController.m; sourceTree = "<group>"; };
 		C288C3D51C87E7630081CA09 /* LLLockConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLLockConfig.h; sourceTree = "<group>"; };
@@ -496,6 +499,7 @@
 		C224B5E71C8596A000A89D75 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				C271F7A61C901DC4006E9EA9 /* ChineseToPinyin */,
 				FDFD62291C8FF84F009589DF /* Foundation+Log.m */,
 				C2C9D8B51C8DA8B400A6212A /* TencentOpenAPI */,
 				C2C9D89D1C8DA09700A6212A /* Wechat */,
@@ -616,6 +620,15 @@
 				C26983391C8AC159004849FF /* View+MASShorthandAdditions.h */,
 			);
 			path = Masonry;
+			sourceTree = "<group>";
+		};
+		C271F7A61C901DC4006E9EA9 /* ChineseToPinyin */ = {
+			isa = PBXGroup;
+			children = (
+				C271F7A71C901DC4006E9EA9 /* ChineseToPinyin.h */,
+				C271F7A81C901DC4006E9EA9 /* ChineseToPinyin.m */,
+			);
+			path = ChineseToPinyin;
 			sourceTree = "<group>";
 		};
 		C288C3D41C87E7630081CA09 /* LLLockView */ = {
@@ -926,6 +939,7 @@
 				FDFD621D1C8FAF40009589DF /* ListTableViewCell.m in Sources */,
 				C24368281C8EAC1C00542310 /* CollectionViewCell.m in Sources */,
 				C288C3F71C87EC1F0081CA09 /* UserViewController.m in Sources */,
+				C271F7A91C901DC4006E9EA9 /* ChineseToPinyin.m in Sources */,
 				FDF92DB21C8AB75100B0ABD5 /* RemindViewController.m in Sources */,
 				C288C4101C880BC30081CA09 /* GestureLockViewController.m in Sources */,
 				C224B5FB1C8596A000A89D75 /* AppDelegate.m in Sources */,

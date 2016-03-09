@@ -7,6 +7,9 @@
 //
 
 #import "AddBookViewController.h"
+#import <AVObject.h>
+#import <AVOSCloud.h>
+#import "ChineseToPinyin.h"
 
 @interface AddBookViewController ()
 
@@ -16,6 +19,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.view.backgroundColor = [UIColor whiteColor];
     
     self.nameTF = [[UITextField alloc] initWithFrame:CGRectMake(0, 64, DAScreenWidth, 30)];
     self.nameTF.placeholder = @"请输入账本名称";
@@ -33,8 +38,17 @@
     
     if (self.nameTF.text.length != 0)
     {
-        [_delegate AddBookName:self.nameTF.text];
+        
+        NSString *name = [ChineseToPinyin pinyinFromChiniseString:self.nameTF.text];
+        NSLog(@"%@", name);
+        AVObject *bookName = [AVObject objectWithClassName:[NSString stringWithFormat:@"%@", name]];
+        [bookName saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            [_delegate AddBookName:self.nameTF.text withObjectID:bookName.objectId];
+        }];
         [self.navigationController popViewControllerAnimated:YES];
+        
+        
+        
     }
     else
     {
@@ -45,6 +59,7 @@
     }
      
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

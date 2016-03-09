@@ -15,6 +15,8 @@
 #import "ListModel.h"
 #import "ListHeaderView.h"
 #import "SRModel.h"
+#import "AccountBookViewController.h"
+#import "accountCell.h"
 @interface ListViewController ()<UITableViewDataSource,UITableViewDelegate,AccountViewControllerDelegate,UICollectionViewDataSource,UICollectionViewDelegate>
 @property(nonatomic,strong)UICollectionView *accountView;
 @property(nonatomic,strong)UIView *mainView;
@@ -34,6 +36,8 @@
 @property(nonatomic,strong)UILabel *zcLabel;
 @property(nonatomic,strong)UILabel *lineLabel;
 
+@property(nonatomic,strong)NSMutableArray *array;
+
 @end
 @implementation ListViewController
 - (void)viewDidLoad {
@@ -47,7 +51,7 @@
     self.accountView.dataSource = self;
     self.accountView.delegate = self;
     
-    [self.accountView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"collection"];
+    [self.accountView registerClass:[accountCell class] forCellWithReuseIdentifier:@"collection"];
     
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ListTableViewCell class]) bundle:nil] forCellReuseIdentifier:@"cell"];
 
@@ -55,7 +59,28 @@
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationItem.rightBarButtonItem = addButton;
     [self.tableView reloadData];
+    
+//    注册一个通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(action:) name:@"zhangben" object:nil];
+    
+}
 
+
+#pragma mark 通知
+
+-(NSMutableArray *)array
+{
+    if (_array == nil) {
+        _array = [NSMutableArray array];
+    }
+    return _array;
+}
+-(void)action:(NSNotification *)notification
+{
+    NSDictionary *dic = [notification userInfo];
+    self.array = dic[@"name"];
+    NSLog(@"账本：%@",self.array);
+    
 }
 
 #pragma mark 添加tableView的头部
@@ -222,6 +247,9 @@
 #pragma mark 添加改变账本种类的按钮
 -(void)accountButtonAction
 {
+    
+    [self.accountView reloadData];
+
     if (self.tag == 100) {
         [UIView animateWithDuration:0.5 animations:^{
             self.accountView.frame = CGRectMake(0, 0, DAScreenWidth,200);
@@ -241,22 +269,19 @@
 }
 
 #pragma mark ecollectionView 代理方法
-
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"collection" forIndexPath:indexPath];
+    accountCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"collection" forIndexPath:indexPath];
     
+   cell.picture.image = [UIImage imageNamed:@"book"];
+   cell.name.text = self.array[indexPath.row];
     return cell;
 }
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 10;
+    return self.array.count;
 }
-
-
-
-
 
 #pragma mark 添加日历按钮
 -(void)calendarButtonAction

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface AccountBookViewController : UIViewController
-
 @property (nonatomic, strong) NSMutableArray *bookName;
+@property(nonatomic,strong)NSMutableArray *tempArray;
 
 @end

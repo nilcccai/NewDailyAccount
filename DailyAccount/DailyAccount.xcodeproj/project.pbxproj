@@ -19,6 +19,8 @@
 		C24368291C8EAC1C00542310 /* CollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C24368271C8EAC1C00542310 /* CollectionViewCell.xib */; };
 		C24368521C8ED14D00542310 /* AddBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C24368511C8ED14D00542310 /* AddBookViewController.m */; };
 		C24368551C8EF55700542310 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C24368541C8EF55700542310 /* DataManager.m */; };
+		C24BAB181C9100A2006CFF9C /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C24BAB171C9100A2006CFF9C /* AboutViewController.m */; };
+		C24BAB1B1C910147006CFF9C /* AboutView.m in Sources */ = {isa = PBXBuildFile; fileRef = C24BAB1A1C910147006CFF9C /* AboutView.m */; };
 		C269833A1C8AC159004849FF /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C26983221C8AC159004849FF /* FirstViewController.m */; };
 		C269833B1C8AC159004849FF /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = C26983241C8AC159004849FF /* MASCompositeConstraint.m */; };
 		C269833C1C8AC159004849FF /* MASConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = C26983271C8AC159004849FF /* MASConstraint.m */; };
@@ -152,6 +154,10 @@
 		C24368511C8ED14D00542310 /* AddBookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddBookViewController.m; sourceTree = "<group>"; };
 		C24368531C8EF55700542310 /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
 		C24368541C8EF55700542310 /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
+		C24BAB161C9100A2006CFF9C /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
+		C24BAB171C9100A2006CFF9C /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
+		C24BAB191C910147006CFF9C /* AboutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutView.h; sourceTree = "<group>"; };
+		C24BAB1A1C910147006CFF9C /* AboutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutView.m; sourceTree = "<group>"; };
 		C26983211C8AC159004849FF /* FirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
 		C26983221C8AC159004849FF /* FirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
 		C26983231C8AC159004849FF /* MASCompositeConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASCompositeConstraint.h; sourceTree = "<group>"; };
@@ -787,6 +793,8 @@
 				C271F7A11C8FC51C006E9EA9 /* UserInfoViewController.m */,
 				C288C3F21C87EC1F0081CA09 /* UserViewController.h */,
 				C288C3F31C87EC1F0081CA09 /* UserViewController.m */,
+				C24BAB161C9100A2006CFF9C /* AboutViewController.h */,
+				C24BAB171C9100A2006CFF9C /* AboutViewController.m */,
 			);
 			path = LoginAndRegister;
 			sourceTree = "<group>";
@@ -821,6 +829,8 @@
 				C288C4051C87EC990081CA09 /* UserView.m */,
 				C271F7A31C8FC544006E9EA9 /* UserInfoView.h */,
 				C271F7A41C8FC544006E9EA9 /* UserInfoView.m */,
+				C24BAB191C910147006CFF9C /* AboutView.h */,
+				C24BAB1A1C910147006CFF9C /* AboutView.m */,
 			);
 			path = LoginAndRegister;
 			sourceTree = "<group>";
@@ -926,7 +936,7 @@
 				TargetAttributes = {
 					C224B5B31C85963D00A89D75 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = 8L9BZ883W8;
+						DevelopmentTeam = 57N9G42VQ2;
 					};
 				};
 			};
@@ -1068,6 +1078,7 @@
 				C24368241C8E602A00542310 /* SwitchManger.m in Sources */,
 				C269833A1C8AC159004849FF /* FirstViewController.m in Sources */,
 				C271F7A51C8FC544006E9EA9 /* UserInfoView.m in Sources */,
+				C24BAB1B1C910147006CFF9C /* AboutView.m in Sources */,
 				FDF92DB01C8AB75100B0ABD5 /* MoneyViewController.m in Sources */,
 				C224B5B91C85963D00A89D75 /* main.m in Sources */,
 				C271F8471C904F1F006E9EA9 /* RotatedView.m in Sources */,
@@ -1085,6 +1096,7 @@
 				FDF92DB21C8AB75100B0ABD5 /* RemindViewController.m in Sources */,
 				C271F8311C904F1F006E9EA9 /* CalendarView.m in Sources */,
 				C288C4101C880BC30081CA09 /* GestureLockViewController.m in Sources */,
+				C24BAB181C9100A2006CFF9C /* AboutViewController.m in Sources */,
 				C224B5FB1C8596A000A89D75 /* AppDelegate.m in Sources */,
 				FDF92DA61C8AB75100B0ABD5 /* CalendarButtonController.m in Sources */,
 				C288C40B1C87EC990081CA09 /* RegisterView.m in Sources */,

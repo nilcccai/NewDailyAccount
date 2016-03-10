@@ -14,6 +14,7 @@
 #import <UMSocial.h>
 #import <LocalAuthentication/LocalAuthentication.h>
 #import "UserInfoViewController.h"
+#import "AboutViewController.h"
 
 @interface UserViewController ()<UITableViewDataSource, UITableViewDelegate, UMSocialUIDelegate, UserNameDelegate, UserLogOut>
 
@@ -183,6 +184,13 @@
                 default:
                     break;
             }
+            break;
+        }
+        case 2:
+        {
+            AboutViewController *aboutVC = [AboutViewController new];
+            aboutVC.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:aboutVC animated:YES];
             break;
         }
         default:

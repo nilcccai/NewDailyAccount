@@ -79,9 +79,8 @@
     [self.categoryView addSubview:self.labelCategoryName];
     
     //分类金额
-    self.labelCategoryMoney = [[UILabel alloc] initWithFrame:CGRectMake(300,5,100,30)];
+    self.labelCategoryMoney = [[UILabel alloc] initWithFrame:CGRectMake(270,5,100,30)];
     self.labelCategoryMoney.text = @"456";
-    
     // self.labelCategoryMoney.textAlignment = NSTextAlignmentRight;
     self.labelCategoryMoney.font = [UIFont systemFontOfSize:15];
     self.labelCategoryMoney.textColor = [UIColor darkGrayColor];

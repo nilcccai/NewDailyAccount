@@ -39,6 +39,7 @@
 @property(nonatomic,copy) NSString * str;
 @property(nonatomic,copy) NSString * str1;
 
+@property(nonatomic,strong)NSMutableArray * mutArray10;
 @end
 @implementation ListViewController
 - (void)viewDidLoad {
@@ -94,12 +95,18 @@
     [self.headerView addSubview:self.zjLabel];
     self.zcLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.zjLabel.frame) + 20, 50,self.zjLabel.frame.size.width, 50)];
     self.zcLabel.textAlignment = NSTextAlignmentCenter;
+    
     self.zcLabel.text = @"3月份支出\n113.00";
+    
+    
     self.zcLabel.numberOfLines = 0;
     [self.headerView addSubview:self.zcLabel];
     
     self.srLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.zjLabel.frame) - self.zjLabel.frame.size.width, 50, self.zjLabel.frame.size.width, 50)];
+    
     self.srLabel.text = @"3月份收入\n113.00";
+    
+    
     self.srLabel.numberOfLines = 0;
     self.srLabel.textAlignment = NSTextAlignmentCenter;
     [self.headerView addSubview:self.srLabel];
@@ -126,33 +133,40 @@
     return _tempArray1;
 }
 
-
--(void)sendMessageToAlarmWith:(NSMutableArray *)mutArray
+-(NSMutableArray *)mutArray10
 {
+    if (!_mutArray10) {
+        _mutArray10 = [NSMutableArray array];
+    }
+    return _mutArray10;
+}
+-(void)sendMessageToAlarmWith:(NSMutableDictionary *)mutArray
+{
+
+    [self.mutArray10 addObject:mutArray];
+    DALog(@"mutArray1 :%@",self.mutArray10);
     
     NSMutableDictionary *d = [NSMutableDictionary dictionary];
     NSMutableDictionary *dd = [NSMutableDictionary dictionary];
-    for (NSDictionary *dic in mutArray) {
+    for (NSDictionary *dic in self.mutArray10) {
         self.index = dic[@"index"];
         if ([self.index isEqualToString:@"0"]) {
             SRModel *srModel = [[SRModel alloc] init];
             [srModel setValuesForKeysWithDictionary:dic];
             [self.tempArray addObject:srModel];
-            
            ListModel *model = [[ListModel alloc] init];
-            for (NSDictionary *ddic in mutArray) {
+            for (NSDictionary *ddic in self.mutArray10) {
                 self.str = ddic[@"image"];
             }
             [d setValue:self.str forKey:@"image"];
             [model setValuesForKeysWithDictionary:d];
            [self.tempArray1 addObject:model];
-            
         }else{
             ListModel *model = [[ListModel alloc] init];
             [model setValuesForKeysWithDictionary:dic];
             [self.tempArray1 addObject:model];
             SRModel *srModel = [[SRModel alloc] init];
-            for (NSDictionary *dict in mutArray) {
+            for (NSDictionary *dict in self.mutArray10) {
                 self.str1 = dict[@"image"];
             }
             [dd setValue:self.str1 forKey:@"image"];
@@ -160,9 +174,8 @@
             [self.tempArray addObject:srModel];
         }
     }
-    [self.tableView reloadData];
-//    DALog(@"=========%@",self.tempArray);
     
+    [self.tableView reloadData];
 }
 #pragma mark 记账
 - (void)addButtonDidClicked:(UIBarButtonItem *)sender
@@ -180,7 +193,6 @@
     //self.mainView.backgroundColor = [UIColor redColor];
     [self.view addSubview:self.mainView];
     //    添加账本选择的view
-    
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     layout.minimumInteritemSpacing = 5;
     layout.minimumLineSpacing = 5;
@@ -192,7 +204,6 @@
     
     self.rect = CGRectMake(0,164, DAScreenWidth, DAScreenHeight - 164);
     self.tableView = [[UITableView alloc] initWithFrame:self.rect style:UITableViewStylePlain];
-
     [self.view addSubview:self.tableView];
     //    添加闹铃
     self.alarmButton = [UIButton buttonWithType:UIButtonTypeSystem];
@@ -203,10 +214,8 @@
         make.top.mas_equalTo(30);
         make.width.and.height.mas_equalTo(32);
     }];
-    
     [self.alarmButton setBackgroundImage:[UIImage imageNamed:@"naoling"] forState:UIControlStateNormal];
     [self.alarmButton addTarget:self action:@selector(alarmButtonAction) forControlEvents:UIControlEventTouchUpInside];
-    
     //    添加改变账本种类的按钮
     self.accountButton = [UIButton buttonWithType:UIButtonTypeSystem];
     [self.mainView addSubview:self.accountButton];
@@ -247,9 +256,7 @@
 #pragma mark 添加改变账本种类的按钮
 -(void)accountButtonAction
 {
-    
     [self.accountView reloadData];
-
     if (self.tag == 100) {
         [UIView animateWithDuration:0.5 animations:^{
             self.accountView.frame = CGRectMake(0, 0, DAScreenWidth,200);
@@ -312,19 +319,8 @@
 {
     ListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     
-//
-//    if ([self.index isEqualToString:@"0"]) {
-//        cell.srModel = self.tempArray[indexPath.row];
-//        
-//    
-//    }else{
-//        
-//
-//        
-//        cell.model = self.tempArray1[indexPath.row];
-//    }
-          cell.srModel = self.tempArray[indexPath.row];
-          cell.model = self.tempArray1[indexPath.row];
+    cell.srModel = self.tempArray[indexPath.row];
+    cell.model = self.tempArray1[indexPath.row];
 
 
     return cell;

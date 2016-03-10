@@ -10,7 +10,7 @@
 
 @protocol AccountViewControllerDelegate <NSObject>
 
--(void)sendMessageToAlarmWith:(NSMutableArray *)mutArray;
+-(void)sendMessageToAlarmWith:(NSMutableDictionary *)mutArray;
 
 @end
 

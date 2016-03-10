@@ -96,6 +96,13 @@
     UIView *navigationView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, DAScreenWidth, 64)];
     navigationView.backgroundColor = DABlueColor;
     [self.view addSubview:navigationView];
+    
+    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    backButton.frame = CGRectMake(20, 20, 32, 32);
+    [backButton setTitle:nil forState:UIControlStateNormal];
+    [backButton setImage:[UIImage imageNamed:@"userDown"] forState:UIControlStateNormal];
+    [navigationView addSubview:backButton];
+    [backButton addTarget:self action:@selector(backButtonDidClicked:) forControlEvents:UIControlEventTouchUpInside];
 
     self.view.backgroundColor = [UIColor whiteColor];
     self.headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, DAScreenWidth, 108)];
@@ -122,23 +129,31 @@
     [self.saveButton addTarget:self action:@selector(saveButtonDidClicked:) forControlEvents:UIControlEventTouchUpInside];
 }
 
+#pragma mark 返回按钮点击事件
+- (void)backButtonDidClicked:(UIButton *)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark 保存按钮
 - (void)saveButtonDidClicked:(UIButton *)sender
 {
-    [self.dict removeAllObjects];
     [self.dict setValue:self.className.text forKey:@"name"];
     [self.dict setValue:self.priceTF.text forKey:@"money"];
     [self.dict setValue:self.str forKey:@"image"];
-    [self.dict setValue:self.str forKey:@"aimage"];
     [self.dict setValue:self.index forKey:@"index"];
-    [self.mutbleArray addObject:self.dict];
+    
+    //[self.mutbleArray addObject:self.dict];
     NSLog(@"++++++%@",self.mutbleArray);
     if ([self.delegate respondsToSelector:@selector(sendMessageToAlarmWith:)]) {
-        [self.delegate sendMessageToAlarmWith:self.mutbleArray];
+        [self.delegate sendMessageToAlarmWith:self.dict];
     }
+    
     [self dismissViewControllerAnimated:YES completion:nil];
 
 }
 
+#pragma mark 标签
 -(void)segementClick:(UISegmentedControl *)sender
 {
     if (sender.selectedSegmentIndex == 0) {
@@ -155,6 +170,7 @@
     
 }
 
+#pragma mark 头视图
 - (void)createHeaderView
 {
     self.classImage = [[UIImageView alloc] initWithFrame:CGRectMake(12, 70, 32, 32)];
@@ -171,15 +187,13 @@
     [self.headerView addSubview:self.priceTF];
     
     self.saveButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    self.saveButton.frame = CGRectMake(CGRectGetMaxX(self.priceTF.frame) + 10, 77, 30, 30);
+    self.saveButton.frame = CGRectMake(CGRectGetMaxX(self.priceTF.frame) + 10, 71, 30, 30);
     [self.saveButton setTitle:@"保存" forState:UIControlStateNormal];
     [self.saveButton setTintColor:DABlueColor];
     [self.headerView addSubview:self.saveButton];
 }
 -(void)creatLeftView
 {
-    
-    
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     layout.minimumInteritemSpacing = 5;
     layout.minimumLineSpacing = 5;

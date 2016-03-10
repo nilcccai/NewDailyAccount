@@ -88,7 +88,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    NSLog(@"%ld",self.tempArray.count);
+//    NSLog(@"%ld",self.tempArray.count);
     return self.tempArray.count;
     
 }

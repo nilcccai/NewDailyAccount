@@ -26,6 +26,7 @@
 
 -(void)setSrModel:(SRModel *)srModel
 {
+    _srModel = srModel;
     self.LNameLabel.text = srModel.name;
     self.LMoneyLabel.text = srModel.money;
         self.aImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",srModel.image]];

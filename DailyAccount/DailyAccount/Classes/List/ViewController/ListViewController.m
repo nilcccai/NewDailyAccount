@@ -26,17 +26,18 @@
 @property(nonatomic,assign)NSInteger tag;
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,assign)CGRect rect;
-
 @property(nonatomic,strong)NSMutableArray *tempArray;
 @property(nonatomic,strong)NSMutableArray *tempArray1;
 @property(nonatomic,copy)NSString *index;
-
 @property(nonatomic,strong)UILabel *zjLabel;
 @property(nonatomic,strong)UILabel *srLabel;
 @property(nonatomic,strong)UILabel *zcLabel;
 @property(nonatomic,strong)UILabel *lineLabel;
-
 @property(nonatomic,strong)NSMutableArray *array;
+
+@property(nonatomic,strong)NSMutableArray *arr1;
+@property(nonatomic,copy) NSString * str;
+@property(nonatomic,copy) NSString * str1;
 
 @end
 @implementation ListViewController
@@ -62,12 +63,8 @@
     
 //    注册一个通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(action:) name:@"zhangben" object:nil];
-    
 }
-
-
-#pragma mark 通知
-
+#pragma mark 通知传值
 -(NSMutableArray *)array
 {
     if (_array == nil) {
@@ -80,11 +77,8 @@
     NSDictionary *dic = [notification userInfo];
     self.array = dic[@"name"];
     NSLog(@"账本：%@",self.array);
-    
 }
-
 #pragma mark 添加tableView的头部
-
 -(void)createHeaderView
 {
     self.headerView = [ListHeaderView listHeaderView];
@@ -98,7 +92,6 @@
     self.zjLabel.layer.masksToBounds = YES;
     self.zjLabel.layer.cornerRadius = (DAScreenWidth/3 - 20)/2;
     [self.headerView addSubview:self.zjLabel];
-    
     self.zcLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.zjLabel.frame) + 20, 50,self.zjLabel.frame.size.width, 50)];
     self.zcLabel.textAlignment = NSTextAlignmentCenter;
     self.zcLabel.text = @"3月份支出\n113.00";
@@ -109,7 +102,6 @@
     self.srLabel.text = @"3月份收入\n113.00";
     self.srLabel.numberOfLines = 0;
     self.srLabel.textAlignment = NSTextAlignmentCenter;
-    
     [self.headerView addSubview:self.srLabel];
     
     self.lineLabel =[[UILabel alloc] initWithFrame:CGRectMake((DAScreenWidth-2)/2, CGRectGetMaxY(self.zjLabel.frame), 2, self.headerView.frame.size.height - CGRectGetMaxY(self.zjLabel.frame))];
@@ -135,30 +127,41 @@
 }
 
 
-
 -(void)sendMessageToAlarmWith:(NSMutableArray *)mutArray
 {
+    
+    NSMutableDictionary *d = [NSMutableDictionary dictionary];
+    NSMutableDictionary *dd = [NSMutableDictionary dictionary];
     for (NSDictionary *dic in mutArray) {
-        
         self.index = dic[@"index"];
-        
         if ([self.index isEqualToString:@"0"]) {
             SRModel *srModel = [[SRModel alloc] init];
             [srModel setValuesForKeysWithDictionary:dic];
             [self.tempArray addObject:srModel];
-            ListModel *model = [[ListModel alloc] init];
-            [self.tempArray1 addObject:model];
+            
+           ListModel *model = [[ListModel alloc] init];
+            for (NSDictionary *ddic in mutArray) {
+                self.str = ddic[@"image"];
+            }
+            [d setValue:self.str forKey:@"image"];
+            [model setValuesForKeysWithDictionary:d];
+           [self.tempArray1 addObject:model];
             
         }else{
             ListModel *model = [[ListModel alloc] init];
             [model setValuesForKeysWithDictionary:dic];
             [self.tempArray1 addObject:model];
             SRModel *srModel = [[SRModel alloc] init];
+            for (NSDictionary *dict in mutArray) {
+                self.str1 = dict[@"image"];
+            }
+            [dd setValue:self.str1 forKey:@"image"];
+            [srModel setValuesForKeysWithDictionary:dd];
             [self.tempArray addObject:srModel];
         }
     }
     [self.tableView reloadData];
-    DALog(@"=========%@",self.tempArray);
+//    DALog(@"=========%@",self.tempArray);
     
 }
 #pragma mark 记账
@@ -181,16 +184,13 @@
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     layout.minimumInteritemSpacing = 5;
     layout.minimumLineSpacing = 5;
-    layout.itemSize = CGSizeMake(DAScreenWidth/3, 180);
+    layout.itemSize = CGSizeMake(DAScreenWidth/3,200);
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     self.accountView = [[UICollectionView alloc] initWithFrame:CGRectMake(0,-200, DAScreenWidth,200) collectionViewLayout:layout];
-    self.accountView.backgroundColor = [UIColor redColor];
-//    self.accountView = [[UIView alloc] initWithFrame:CGRectMake(0,-200, DAScreenWidth,200)];
-    //self.accountView.backgroundColor = [UIColor greenColor];
+    self.accountView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.accountView];
     
     self.rect = CGRectMake(0,164, DAScreenWidth, DAScreenHeight - 164);
-    
     self.tableView = [[UITableView alloc] initWithFrame:self.rect style:UITableViewStylePlain];
 
     [self.view addSubview:self.tableView];
@@ -283,6 +283,20 @@
     return self.array.count;
 }
 
+#pragma mark collection 被选中的方法
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self.accountButton setTitle:self.array[indexPath.row] forState:UIControlStateNormal];
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        self.accountView.frame = CGRectMake(0, -200, DAScreenWidth,200);
+        self.mainView.frame = CGRectMake(0,64, DAScreenWidth, 100);
+        self.tableView.frame = self.rect;
+    }];
+    
+    
+}
+
 #pragma mark 添加日历按钮
 -(void)calendarButtonAction
 {
@@ -298,13 +312,21 @@
 {
     ListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     
-    if ([self.index isEqualToString:@"0"]) {
-        cell.srModel = self.tempArray[indexPath.row];
-        
-    }else{
-        
-        cell.model = self.tempArray1[indexPath.row];
-    }
+//
+//    if ([self.index isEqualToString:@"0"]) {
+//        cell.srModel = self.tempArray[indexPath.row];
+//        
+//    
+//    }else{
+//        
+//
+//        
+//        cell.model = self.tempArray1[indexPath.row];
+//    }
+          cell.srModel = self.tempArray[indexPath.row];
+          cell.model = self.tempArray1[indexPath.row];
+
+
     return cell;
 }
 

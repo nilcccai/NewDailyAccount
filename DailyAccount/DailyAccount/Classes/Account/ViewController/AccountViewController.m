@@ -128,6 +128,7 @@
     [self.dict setValue:self.className.text forKey:@"name"];
     [self.dict setValue:self.priceTF.text forKey:@"money"];
     [self.dict setValue:self.str forKey:@"image"];
+    [self.dict setValue:self.str forKey:@"aimage"];
     [self.dict setValue:self.index forKey:@"index"];
     [self.mutbleArray addObject:self.dict];
     NSLog(@"++++++%@",self.mutbleArray);

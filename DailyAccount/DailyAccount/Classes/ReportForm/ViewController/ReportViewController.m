@@ -165,15 +165,15 @@
             if ([self doesN] == 1)
             {
                 [self.reportView.dateButton setTitle:[[self.reportView.dateButton currentTitle]stringByReplacingCharactersInRange:NSMakeRange(5, 2) withString:@"12"]  forState:UIControlStateNormal] ;
-                [self.reportView.dateButton setTitle:[[self.reportView.dateButton currentTitle]stringByReplacingCharactersInRange:NSMakeRange(0, 4) withString:[NSString stringWithFormat:@"%ld",[self getYear]-1]]  forState:UIControlStateNormal] ;
+                [self.reportView.dateButton setTitle:[[self.reportView.dateButton currentTitle]stringByReplacingCharactersInRange:NSMakeRange(0, 4) withString:[NSString stringWithFormat:@"%d",[self getYear]-1]]  forState:UIControlStateNormal] ;
             }
             else
-                [self.reportView.dateButton setTitle:[[self.reportView.dateButton currentTitle]stringByReplacingCharactersInRange:NSMakeRange(5, 2) withString:[NSString stringWithFormat:@"0%ld",[self doesN]-1]]  forState:UIControlStateNormal] ;
+                [self.reportView.dateButton setTitle:[[self.reportView.dateButton currentTitle]stringByReplacingCharactersInRange:NSMakeRange(5, 2) withString:[NSString stringWithFormat:@"0%d",[self doesN]-1]]  forState:UIControlStateNormal] ;
         else
-                [self.reportView.dateButton setTitle:[[self.reportView.dateButton currentTitle]stringByReplacingCharactersInRange:NSMakeRange(5, 2) withString:[NSString stringWithFormat:@"%ld",[self doesN]-1]]  forState:UIControlStateNormal] ;
+                [self.reportView.dateButton setTitle:[[self.reportView.dateButton currentTitle]stringByReplacingCharactersInRange:NSMakeRange(5, 2) withString:[NSString stringWithFormat:@"%d",[self doesN]-1]]  forState:UIControlStateNormal] ;
         _date = [NSDate dateWithTimeInterval:-24*60*60*30 sinceDate:_date];
         NSRange days = [[NSCalendar currentCalendar] rangeOfUnit:NSDayCalendarUnit inUnit:kCFCalendarUnitMonth forDate:_date];
-        [self.reportView.dateButton setTitle:[[self.reportView.dateButton currentTitle]stringByReplacingCharactersInRange:NSMakeRange(11, 2) withString:[NSString stringWithFormat:@"%lu",days.length]]  forState:UIControlStateNormal] ;
+        [self.reportView.dateButton setTitle:[[self.reportView.dateButton currentTitle]stringByReplacingCharactersInRange:NSMakeRange(11, 2) withString:[NSString stringWithFormat:@"%lu",(unsigned long)days.length]]  forState:UIControlStateNormal] ;
         
         
     }
@@ -187,18 +187,18 @@
     if (sender.tag == 102)
     {
         if ([self doesN] < 9)
-            [self.reportView.dateButton setTitle:[[self.reportView.dateButton currentTitle]stringByReplacingCharactersInRange:NSMakeRange(5, 2) withString:[NSString stringWithFormat:@"0%ld",[self doesN]+1]]  forState:UIControlStateNormal] ;
+            [self.reportView.dateButton setTitle:[[self.reportView.dateButton currentTitle]stringByReplacingCharactersInRange:NSMakeRange(5, 2) withString:[NSString stringWithFormat:@"0%d",[self doesN]+1]]  forState:UIControlStateNormal] ;
         else
             if ([self doesN] == 12)
             {
                 [self.reportView.dateButton setTitle:[[self.reportView.dateButton currentTitle]stringByReplacingCharactersInRange:NSMakeRange(5, 2) withString:@"01"]forState:UIControlStateNormal] ;
-                [self.reportView.dateButton setTitle:[[self.reportView.dateButton currentTitle]stringByReplacingCharactersInRange:NSMakeRange(0, 4) withString:[NSString stringWithFormat:@"%ld",[self getYear]+1]]  forState:UIControlStateNormal] ;
+                [self.reportView.dateButton setTitle:[[self.reportView.dateButton currentTitle]stringByReplacingCharactersInRange:NSMakeRange(0, 4) withString:[NSString stringWithFormat:@"%d",[self getYear]+1]]  forState:UIControlStateNormal] ;
             }
             else
-                 [self.reportView.dateButton setTitle:[[self.reportView.dateButton currentTitle]stringByReplacingCharactersInRange:NSMakeRange(5, 2) withString:[NSString stringWithFormat:@"%ld",[self doesN]+1]]  forState:UIControlStateNormal] ;
+                 [self.reportView.dateButton setTitle:[[self.reportView.dateButton currentTitle]stringByReplacingCharactersInRange:NSMakeRange(5, 2) withString:[NSString stringWithFormat:@"%d",[self doesN]+1]]  forState:UIControlStateNormal] ;
         self.date = [NSDate dateWithTimeInterval:24*60*60*30 sinceDate:self.date];
         NSRange days = [[NSCalendar currentCalendar] rangeOfUnit:NSDayCalendarUnit inUnit:kCFCalendarUnitMonth forDate:self.date];
-        [self.reportView.dateButton setTitle:[[self.reportView.dateButton currentTitle]stringByReplacingCharactersInRange:NSMakeRange(11, 2) withString:[NSString stringWithFormat:@"%lu",days.length]]  forState:UIControlStateNormal] ;
+        [self.reportView.dateButton setTitle:[[self.reportView.dateButton currentTitle]stringByReplacingCharactersInRange:NSMakeRange(11, 2) withString:[NSString stringWithFormat:@"%lu",(unsigned long)(unsigned long)days.length]]  forState:UIControlStateNormal] ;
     }
 }
 //获取日期

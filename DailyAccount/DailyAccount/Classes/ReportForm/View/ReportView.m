@@ -60,7 +60,7 @@
     NSDateFormatter *matter = [[NSDateFormatter alloc] init];
     [matter setDateFormat:@"yyyy年MM月"];
     NSString *date = [matter stringFromDate:[NSDate date]];
-    [self.dateButton setTitle:[NSString stringWithFormat:@"%@1日～%lu日",date,days.length] forState:UIControlStateNormal];
+    [self.dateButton setTitle:[NSString stringWithFormat:@"%@1日～%lu日",date,(unsigned long)days.length] forState:UIControlStateNormal];
     [self.dateView addSubview:self.dateButton];
     self.dateButton.tag = 101;
     

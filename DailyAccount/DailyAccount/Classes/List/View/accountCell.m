@@ -21,11 +21,12 @@
 - (void)createView
 {
     self.backgroundColor = [UIColor whiteColor];
-    self.picture = [[UIImageView alloc] initWithFrame:self.contentView.bounds];
+//    self.picture = [[UIImageView alloc] initWithFrame:self.contentView.bounds];
+    self.picture = [[UIImageView alloc] initWithFrame:CGRectMake(0, 70, DAScreenWidth /3, self.contentView.frame.size.height -74)];
     self.picture.image = [UIImage imageNamed:@"book"];
     [self.contentView addSubview:self.picture];
     
-    self.name = [[UILabel alloc] initWithFrame:CGRectMake(self.picture.bounds.size.width / 4 , self.picture.bounds.size.height / 2, self.picture.bounds.size.width / 4 * 3, 25)];
+    self.name = [[UILabel alloc] initWithFrame:CGRectMake(self.picture.frame.size.width / 4 , self.picture.frame.size.height / 2, self.picture.frame.size.width / 4 * 3, 25)];
     self.name.numberOfLines = 0;
     [self.picture addSubview:self.name];
     

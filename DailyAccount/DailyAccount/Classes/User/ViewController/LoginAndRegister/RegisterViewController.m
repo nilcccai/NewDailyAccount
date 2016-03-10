@@ -51,7 +51,7 @@
 #pragma mark 发送验证码
 - (void)sendButtonDidClicked:(UIButton *)sender
 {
-#warning 记得打开啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊！！！！！！！！！！！！！！！！！！！！
+//#warning 记得打开啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊！！！！！！！！！！！！！！！！！！！！
     /*
     [AVOSCloud requestSmsCodeWithPhoneNumber:self.registerView.phoneNumTF.text appName:@"每天记" operation:@"注册账户" timeToLive:5 callback:^(BOOL succeeded, NSError *error) {
         if (succeeded)
@@ -75,7 +75,7 @@
 {
     self.time--;
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timeAction) userInfo:nil repeats:NO];
-    NSString *str = [NSString stringWithFormat:@"剩余%ld秒", self.time];
+    NSString *str = [NSString stringWithFormat:@"剩余%ld秒", (long)self.time];
     [self.registerView.sendButton setTitle:str forState:UIControlStateNormal];
     if (self.time == 0)
     {

@@ -127,6 +127,7 @@
     self.priceTF.delegate = self;
     
     [self.saveButton addTarget:self action:@selector(saveButtonDidClicked:) forControlEvents:UIControlEventTouchUpInside];
+    NSLog(@"123");
 }
 
 #pragma mark 返回按钮点击事件
